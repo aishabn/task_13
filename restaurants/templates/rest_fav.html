@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}Favorites{% endblock title %}
+
+{% block content %}
+<br>
+
+<div class="row">
+    {% for favs in rest_fav %}
+    <div class="col-md-4">
+        <div class="card my-card">
+    
+          <div class="card-body">
+            <h5 class="card-title">{{favs.name}}</h5>
+            <h5 class="card-title">{{favs.description}}</h5>
+          </div>
+         
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

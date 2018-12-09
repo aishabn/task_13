@@ -26,11 +26,44 @@
           <ul class="list-group list-group-flush">
             <li class="list-group-item text-center">
                 <a href="{% url 'restaurant-detail' restaurant.id %}" class="btn btn-outline-dark">View</a>
+
+                <button class="btn btn-light" onclick="favorite({{restaurant.id}})"> <i id="fav-{{restaurant.id}}" class="far fa-star {% if restaurant in rest_fav %}text-success{% endif %}" > </i> </button>
             </li>
           </ul>
         </div>
     </div>
     {% endfor %}
 </div>
+
+
+<script type="text/javascript">
+
+  function favorite(id){
+
+
+    var star_id = "#fav-"+id;
+
+    $.ajax({
+
+      type: "GET",
+      url: "/restaurants/"+id+"/favorite/",
+
+      error: function (){
+        alert("Something went wrong...")
+      },
+
+      success: function(data) {
+        if (data.action === "favorite"){
+          $(star_id).addClass("text-success");
+        }
+        else {
+          $(star_id).removeClass("text-success");
+        }
+
+      },
+    })
+  }
+</script>
+
 {% endblock content %}
 
